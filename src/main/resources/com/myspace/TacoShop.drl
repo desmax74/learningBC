@@ -1,0 +1,37 @@
+package com.myspace;
+
+import com.myspace.Purchase;
+
+global Integer comboCount;
+
+rule "purchase over 15 and less than 25 dollars"
+    when
+        $p : Purchase ( total > 15, total <= 25 ) 
+    then
+        $p.setDiscount(0.10);
+        System.out.println("Level 1 discount: " + $p.getDiscount());
+end
+
+rule "purchase over 25 dollars"
+    when
+        $p : Purchase ( total > 25 )
+    then
+        $p.setDiscount(0.15);
+    System.out.println("Level 2 discount: " + $p.getDiscount());
+end
+
+rule "purchase contains combo" salience -1
+    when
+        $p : Purchase ( drinkIncluded, tacoCount >= 2 )
+    then
+        $p.setDiscount($p.getDiscount() + 0.05);
+        System.out.println("Combo discount: " + $p.getDiscount());
+end
+/*
+rule "example rule"
+    when
+        $p : Purchase ( tacoCount >= comboCount, ( tacoCount % 2 == 0 ) )
+    then
+    $p.setDiscount(addDiscount($p, 0.15));
+end
+*/

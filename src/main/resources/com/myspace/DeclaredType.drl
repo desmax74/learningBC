@@ -1,0 +1,16 @@
+package com.myspace;
+
+import com.myspace.Product;
+
+declare SpecialOrder extends Product
+      whatsSoSpecialAboutIt: String
+      product: Product
+end
+
+
+declare PropertyReactiveOrder       
+    @propertyReactive       
+     product: Product       
+     totalItems: Integer       
+     total: Double   
+end
